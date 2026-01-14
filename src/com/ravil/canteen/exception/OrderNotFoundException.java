@@ -1,2 +1,7 @@
-public class OrderNotFoundException {
+package com.ravil.canteen.exception;
+
+public class OrderNotFoundException extends RuntimeException {
+    public OrderNotFoundException(String message) {
+        super(message);
+    }
 }
