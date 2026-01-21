@@ -3,7 +3,6 @@ package com.ravil.canteen.repository;
 import com.ravil.canteen.model.MenuItem;
 import com.ravil.canteen.util.Db;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.*;
 

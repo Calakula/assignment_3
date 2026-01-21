@@ -1,87 +1,55 @@
 package com.ravil.canteen.repository;
 
-import com.ravil.canteen.model.Order;
+import com.ravil.canteen.model.OrderItem;
 import com.ravil.canteen.util.Db;
 
+import java.math.BigDecimal;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class OrderRepository {
+public class OrderItemRepository {
 
-    // Создать новый заказ со статусом ACTIVE
-    public Order createActive(int customerId) {
-        String sql = "INSERT INTO orders (customer_id, status) VALUES (?, 'ACTIVE') RETURNING id, created_at";
+    // Добавить позицию в заказ
+    public OrderItem addItem(int orderId, int menuItemId, int quantity, BigDecimal unitPrice) {
+        String sql = "INSERT INTO order_items (order_id, menu_item_id, quantity, unit_price) " +
+                "VALUES (?, ?, ?, ?) RETURNING id";
         try (Connection c = Db.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1, customerId);
+            ps.setInt(1, orderId);
+            ps.setInt(2, menuItemId);
+            ps.setInt(3, quantity);
+            ps.setBigDecimal(4, unitPrice);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return new Order(
-                            rs.getInt("id"),
-                            customerId,
-                            "ACTIVE",
-                            rs.getTimestamp("created_at").toLocalDateTime()
-                    );
+                    return new OrderItem(rs.getInt(1), orderId, menuItemId, quantity, unitPrice);
                 }
             }
-            throw new RuntimeException("Не удалось создать заказ");
+            throw new RuntimeException("Не удалось добавить элемент заказа");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
-    // Найти заказ по ID
-    public Optional<Order> findById(int id) {
-        String sql = "SELECT id, customer_id, status, created_at FROM orders WHERE id = ?";
+    public List<OrderItem> findByOrderId(int orderId) {
+        String sql = "SELECT id, order_id, menu_item_id, quantity, unit_price FROM order_items WHERE order_id = ?";
+        List<OrderItem> list = new ArrayList<>();
         try (Connection c = Db.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1, id);
+            ps.setInt(1, orderId);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return Optional.of(new Order(
+                while (rs.next()) {
+                    list.add(new OrderItem(
                             rs.getInt("id"),
-                            rs.getInt("customer_id"),
-                            rs.getString("status"),
-                            rs.getTimestamp("created_at").toLocalDateTime()
+                            rs.getInt("order_id"),
+                            rs.getInt("menu_item_id"),
+                            rs.getInt("quantity"),
+                            rs.getBigDecimal("unit_price")
                     ));
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return Optional.empty();
-    }
-
-    // Получить все активные заказы
-    public List<Order> findActive() {
-        String sql = "SELECT id, customer_id, status, created_at FROM orders WHERE status = 'ACTIVE'";
-        List<Order> list = new ArrayList<>();
-        try (Connection c = Db.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                list.add(new Order(
-                        rs.getInt("id"),
-                        rs.getInt("customer_id"),
-                        rs.getString("status"),
-                        rs.getTimestamp("created_at").toLocalDateTime()
-                ));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
         return list;
-    }
-
-    // Пометить заказ как COMPLETED
-    public void markCompleted(int orderId) {
-        String sql = "UPDATE orders SET status = 'COMPLETED' WHERE id = ?";
-        try (Connection c = Db.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1, orderId);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
