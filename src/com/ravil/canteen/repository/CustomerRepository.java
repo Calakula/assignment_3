@@ -27,6 +27,7 @@ public class CustomerRepository {
         return Optional.empty();
     }
 
+    
     public Customer save(Customer customer) {
         String sql = "INSERT INTO customers (name, email) VALUES (?, ?) RETURNING id";
         try (Connection c = Db.getConnection();
@@ -36,6 +37,7 @@ public class CustomerRepository {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) customer.setId(rs.getInt(1));
             }
+            
             return customer;
         } catch (SQLException e) {
             throw new RuntimeException(e);
