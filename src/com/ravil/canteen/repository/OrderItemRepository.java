@@ -8,7 +8,7 @@ import java.util.*;
 
 public class OrderRepository {
 
-    // Создать новый заказ со статусом ACTIVE
+
     public Order createActive(int customerId) {
         String sql = "INSERT INTO orders (customer_id, status) VALUES (?, 'ACTIVE') RETURNING id, created_at";
         try (Connection c = Db.getConnection();
@@ -30,7 +30,7 @@ public class OrderRepository {
         }
     }
 
-    // Найти заказ по ID
+
     public Optional<Order> findById(int id) {
         String sql = "SELECT id, customer_id, status, created_at FROM orders WHERE id = ?";
         try (Connection c = Db.getConnection();
@@ -52,7 +52,6 @@ public class OrderRepository {
         return Optional.empty();
     }
 
-    // Получить все активные заказы
     public List<Order> findActive() {
         String sql = "SELECT id, customer_id, status, created_at FROM orders WHERE status = 'ACTIVE'";
         List<Order> list = new ArrayList<>();
@@ -73,7 +72,6 @@ public class OrderRepository {
         return list;
     }
 
-    // Пометить заказ как COMPLETED
     public void markCompleted(int orderId) {
         String sql = "UPDATE orders SET status = 'COMPLETED' WHERE id = ?";
         try (Connection c = Db.getConnection();
