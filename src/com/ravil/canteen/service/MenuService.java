@@ -16,6 +16,7 @@ public class MenuService {
         return menuRepo.findAllAvailable();
     }
 
+    
     public MenuItem getAvailableItem(int id) {
         return menuRepo.findById(id)
                 .filter(MenuItem::isAvailable)
