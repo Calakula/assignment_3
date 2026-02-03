@@ -5,7 +5,7 @@ import com.ravil.canteen.repository.MenuItemRepository;
 
 import java.util.List;
 
-public class MenuService {
+public class MenuService { 
     private final MenuItemRepository menuRepo;
 
     public MenuService(MenuItemRepository menuRepo) {
