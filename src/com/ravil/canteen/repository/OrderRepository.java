@@ -6,6 +6,7 @@ import com.ravil.canteen.util.Db;
 import java.sql.*;
 import java.util.*;
 
+
 public class OrderRepository {
     public Order createActive(int customerId) {
         String sql = "INSERT INTO orders (customer_id, status) VALUES (?, 'ACTIVE') RETURNING id, created_at";
