@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.*;
 
+
 public class MenuItemRepository {
     public Optional<MenuItem> findById(int id) {
         String sql = "SELECT id, name, price, available FROM menu_items WHERE id = ?";
