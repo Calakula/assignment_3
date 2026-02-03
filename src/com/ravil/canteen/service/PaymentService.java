@@ -4,7 +4,7 @@ import com.ravil.canteen.model.OrderItem;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+ 
 public class PaymentService {
     public BigDecimal calculateTotal(List&lt;OrderItem&gt; items) {
         BigDecimal total = BigDecimal.ZERO;
