@@ -6,7 +6,7 @@ public class OrderItem {
     private int id;
     private int orderId;
     private int menuItemId;
-    private int quantity;
+    private int quantity; 
     private BigDecimal unitPrice;
 
     public OrderItem() {}
