@@ -8,8 +8,10 @@ import java.util.List;
 public class PaymentService {
     public BigDecimal calculateTotal(List&lt;OrderItem&gt; items) {
         BigDecimal total = BigDecimal.ZERO;
-        for (OrderItem oi : items) {
-            total = total.add(oi.getUnitPrice().multiply(BigDecimal.valueOf(oi.getQuantity())));
-        }
+        return items.stream()
+        .map(oi -> oi.getUnitPrice()
+                .multiply(BigDecimal.valueOf(oi.getQuantity())))
+        .reduce(BigDecimal.ZERO, BigDecimal::add);
+
         return total;
     }
