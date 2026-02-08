@@ -28,7 +28,7 @@ public class OrderBuilder {
         this.status = status;
         return this;
     }
-
+ 
     public OrderBuilder setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
