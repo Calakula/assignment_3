@@ -1,7 +1,8 @@
-package com.canteen.patern.factory;
+package com.canteen.pattern.factory;
 
-public class DineInOrder extends Order {
-    public DineInOrder(int id, int customerId, String status, boolean completed) {
-        super(id, customerId, status,completed);
+public class DineInOrder implements DeliveryOption {
+    @Override
+    public String getDetails() {
+        return "Dine-in order: customer will eat inside the canteen.";
     }
 }
