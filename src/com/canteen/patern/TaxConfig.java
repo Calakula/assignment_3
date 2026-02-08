@@ -5,7 +5,7 @@ public class TaxConfig {
     private double taxRate;
 
     private TaxConfig() {
-        this.taxRate = 0.12; // 12% по умолчанию
+        this.taxRate = 0.12; 
     }
 
     public static synchronized TaxConfig getInstance() {
