@@ -1,4 +1,4 @@
-package com.ravil.canteen.exception;
+package com.canteen.exception;
 
 public class InvalidQuantityException extends RuntimeException {
     public InvalidQuantityException(String message) {

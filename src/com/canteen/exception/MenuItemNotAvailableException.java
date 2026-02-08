@@ -1,4 +1,4 @@
-package com.ravil.canteen.exception;
+package com.canteen.exception;
 
 public class MenuItemNotAvailableException extends RuntimeException {
     public MenuItemNotAvailableException(String message) {

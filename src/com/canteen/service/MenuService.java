@@ -1,7 +1,7 @@
-package com.ravil.canteen.service;
+package com.canteen.service;
 
-import com.ravil.canteen.model.MenuItem;
-import com.ravil.canteen.repository.MenuItemRepository;
+import com.canteen.entity.MenuItem;
+import com.canteen.repository.MenuItemRepository;
 
 import java.util.List;
 
