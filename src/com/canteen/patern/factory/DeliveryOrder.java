@@ -1,7 +1,8 @@
-package com.canteen.patern.factory;
+package com.canteen.pattern.factory;
 
-public class DeliveryOrder extends Order {
-    public DeliveryOrder(int id, int customerId, String status ,boolean completed) {
-        super(id, customerId, status, completed);
+public class DeliveryOrder implements DeliveryOption {
+    @Override
+    public String getDetails() {
+        return "Delivery order: food will be delivered to customer's address.";
     }
 }
