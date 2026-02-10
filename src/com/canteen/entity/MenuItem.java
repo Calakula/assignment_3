@@ -19,8 +19,6 @@ public class MenuService {
     }
 
     public void updateMenuItem(MenuItem item) throws SQLException {
-        // В реальном проекте здесь нужно реализовать UPDATE
-        // Сейчас можно просто удалить и добавить заново
         menuItemRepository.addMenuItem(item);
     }
 
