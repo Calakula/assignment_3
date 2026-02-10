@@ -20,7 +20,7 @@ public class Order {
         this.createdAt = createdAt;
     }
 
-    // Getters & Setters
+    // Getter  & Setter
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
