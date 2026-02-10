@@ -1,3 +1,4 @@
+// Ravil Maratov Add Exception
 package com.canteen.exception;
 
 public class InvalidQuantityException extends RuntimeException {
