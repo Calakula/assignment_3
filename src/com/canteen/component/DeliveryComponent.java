@@ -1,3 +1,4 @@
+//Ravil Maratov add DeliveryComponent
 package com.canteen.component;
 
 import com.canteen.pattern.factory.DeliveryFactory;
