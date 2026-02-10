@@ -1,3 +1,4 @@
+// Ravil Maratov add BillingComponent
 package com.canteen.component;
 
 import com.canteen.entity.Order;
@@ -10,7 +11,6 @@ public class BillingComponent {
     public BillingComponent(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
-
     public void calculateBill(Order order) {
         double subtotal = paymentService.calculateTotal(order);
         double tax = subtotal * TaxConfig.getInstance().getTaxRate();
