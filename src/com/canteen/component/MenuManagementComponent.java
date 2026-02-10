@@ -1,3 +1,4 @@
+// Ravil Maratov add MenuManagementComponent
 package com.canteen.component;
 
 import com.canteen.entity.MenuItem;
